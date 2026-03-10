@@ -1,0 +1,38 @@
+rules:
+
+- name: deny_public_inbound
+  priority: 100
+  action: deny
+  source: internet
+  destination: app-subnet
+  protocol: any
+  reason: prevent direct public access
+
+- name: allow_web_to_app_https
+  priority: 200
+  action: allow
+  source: web-subnet
+  destination: app-subnet
+  port: 443
+  reason: secure communication
+
+- name: allow_outbound_https
+  priority: 300
+  action: allow
+  destination: azure_services
+  port: 443
+  reason: allow storage and telemetry
+
+- name: block_admin_ports
+  priority: 400
+  action: deny
+  source: internet
+  ports: [22,3389]
+  reason: block ssh and rdp
+
+- name: block_lateral_movement
+  priority: 500
+  action: deny
+  source: app-subnet
+  destination: web-subnet
+  reason: avoid lateral movement
