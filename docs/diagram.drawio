@@ -1,55 +1,109 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Azure Architecture">
-    <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10">
+    <mxGraphModel dx="1280" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
 
-        <mxCell id="internet" value="Internet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" vertex="1" parent="1">
-          <mxGeometry x="420" y="20" width="200" height="60" as="geometry"/>
+        <!-- Internet -->
+        <mxCell id="internet" value="Internet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="20" width="220" height="60" as="geometry"/>
         </mxCell>
 
-        <mxCell id="frontdoor" value="Azure Front Door + WAF" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" vertex="1" parent="1">
-          <mxGeometry x="370" y="120" width="300" height="80" as="geometry"/>
+        <!-- Front Door -->
+        <mxCell id="frontdoor" value="Azure Front Door + WAF&#10;(Borda pública / L7)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="120" width="360" height="80" as="geometry"/>
         </mxCell>
 
-        <mxCell id="web" value="App Service (Web)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;" vertex="1" parent="1">
-          <mxGeometry x="180" y="280" width="250" height="100" as="geometry"/>
+        <!-- VNet container -->
+        <mxCell id="vnet" value="VNet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#bf9000;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="250" width="1020" height="360" as="geometry"/>
         </mxCell>
 
-        <mxCell id="api" value="App Service (API Container)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" vertex="1" parent="1">
-          <mxGeometry x="580" y="280" width="250" height="100" as="geometry"/>
+        <!-- Web Subnet -->
+        <mxCell id="websubnet" value="Web Subnet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#cc0000;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="300" width="280" height="60" as="geometry"/>
         </mxCell>
 
-        <mxCell id="storage" value="Azure Storage Account" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="1">
-          <mxGeometry x="580" y="450" width="250" height="100" as="geometry"/>
+        <!-- App Subnet -->
+        <mxCell id="appsubnet" value="App Subnet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d9d2e9;strokeColor=#674ea7;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="790" y="300" width="280" height="60" as="geometry"/>
         </mxCell>
 
-        <mxCell id="tfstate" value="Terraform State (Blob Storage)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" vertex="1" parent="1">
-          <mxGeometry x="100" y="450" width="250" height="100" as="geometry"/>
+        <!-- Web App -->
+        <mxCell id="webapp" value="Azure App Service&#10;(Web)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="250" y="410" width="280" height="100" as="geometry"/>
         </mxCell>
 
-        <mxCell id="github" value="GitHub Actions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;" vertex="1" parent="1">
-          <mxGeometry x="100" y="620" width="250" height="80" as="geometry"/>
+        <!-- API App -->
+        <mxCell id="apiapp" value="Azure App Service&#10;(API Container)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d9d2e9;strokeColor=#674ea7;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="790" y="410" width="280" height="100" as="geometry"/>
         </mxCell>
 
-        <mxCell id="e1" style="endArrow=block" edge="1" parent="1" source="internet" target="frontdoor">
+        <!-- Managed Identity -->
+        <mxCell id="identity" value="Managed Identity&#10;+ RBAC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="560" width="180" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Private Endpoint -->
+        <mxCell id="privateendpoint" value="Private Endpoint" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cfe2f3;strokeColor=#3d85c6;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="670" width="180" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Storage -->
+        <mxCell id="storage" value="Azure Storage Account" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe599;strokeColor=#bf9000;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="780" width="260" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- GitHub Actions -->
+        <mxCell id="github" value="GitHub Actions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f3f3;strokeColor=#666666;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="670" width="240" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Entra/WIF -->
+        <mxCell id="wif" value="Azure Entra ID&#10;Federated Credential&#10;(OIDC / WIF)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d0e0e3;strokeColor=#45818e;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="780" width="240" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- tfstate -->
+        <mxCell id="tfstate" value="Terraform State&#10;(Blob Storage Backend)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c9daf8;strokeColor=#3c78d8;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="910" width="240" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="e1" style="endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="internet" target="frontdoor">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <mxCell id="e2" style="endArrow=block" edge="1" parent="1" source="frontdoor" target="web">
+        <mxCell id="e2" style="endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="frontdoor" target="webapp">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <mxCell id="e3" style="endArrow=block" edge="1" parent="1" source="frontdoor" target="api">
+        <mxCell id="e3" style="endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="frontdoor" target="apiapp">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <mxCell id="e4" style="endArrow=block" edge="1" parent="1" source="api" target="storage">
+        <mxCell id="e4" value="HTTPS" style="endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="webapp" target="apiapp">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <mxCell id="e5" style="endArrow=block;dashed=1" edge="1" parent="1" source="github" target="tfstate">
+        <mxCell id="e5" style="endArrow=block;html=1;strokeWidth=2;dashed=1;" edge="1" parent="1" source="apiapp" target="identity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e6" style="endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="identity" target="privateendpoint">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e7" value="Acesso privado" style="endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="privateendpoint" target="storage">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e8" style="endArrow=block;html=1;strokeWidth=2;dashed=1;" edge="1" parent="1" source="github" target="wif">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e9" value="Backend auth" style="endArrow=block;html=1;strokeWidth=2;dashed=1;" edge="1" parent="1" source="wif" target="tfstate">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 

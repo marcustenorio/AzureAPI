@@ -50,6 +50,27 @@ A infraestrutura pode ser monitorada via **Azure Monitor**, que permite acompanh
 
 ---
 
+## Logs de Rede (NSG Flow Logs)
+
+Para observabilidade da camada de rede, seriam habilitados **NSG Flow Logs** nos Network Security Groups associados às sub-redes.
+
+Os NSG Flow Logs registram:
+
+- tráfego permitido e negado
+- origem e destino das conexões
+- portas e protocolos utilizados
+- comportamento de tráfego entre sub-redes
+
+Esses logs podem ser armazenados em **Azure Storage** e analisados posteriormente via **Azure Monitor / Log Analytics**.
+
+Esse mecanismo permite:
+
+- identificar tentativas de acesso indevido
+- detectar padrões de tráfego anômalos
+- auditar regras de segurança da rede
+
+---
+
 # Health Checks da Aplicação
 
 A API expõe endpoints simples de verificação de saúde.

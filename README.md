@@ -21,9 +21,10 @@ Arquitetura composta por:
 - Managed Identity;
 - Observabilidade via Azure Monitor.
 
+## Como validar o Terraform
 
-Validação:
-
-terraform init
+```bash
+cd terraform/environments/dev
+terraform init -backend=false
 terraform validate
 terraform plan
